@@ -1,23 +1,35 @@
-function getComputerChoice(computerChoice) {
+// gets computer choice
+function getComputerChoice() { 
     let num = Math.random()
         if (num <= 0.33) {
-            console.log('Rock')
+            return 'rock'
         }
         if (num < 0.66 && num > 0.33) {
-            console.log('Paper')
+            return 'paper'
         }
         if (num >= 0.66) {
-            console.log('Scissors')
+            return 'scissors'
         }
 }
 
-function getHumanChoice(humanChoice) {
+// prompts user to enter choice
+function getHumanChoice() {
     let result = prompt('Rock, Paper, Scissors!')
-    if (result != "rock" && result != "paper" && result != "scissors") {
-    console.log('thefucareyoudoingmate')
-    }   else {
-    console.log(getComputerChoice())
-    }
+    let resultModified = result.toLowerCase();
+        return resultModified;
 }
 
-getHumanChoice()
+let humanScore = 0
+let computerScore = 0
+
+function playRound(humanChoice, computerChoice) {
+    console.log("computer says " + getComputerChoice());
+    console.log("you say " + getHumanChoice());
+}
+
+playRound();
+
+
+    //     if (resultModified != "rock" && resultModified != "paper" && resultModified != "scissors") {
+    //     console.log('thefucareyoudoingmate')
+    // }   else {
