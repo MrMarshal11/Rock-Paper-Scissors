@@ -6,10 +6,20 @@
 let result = prompt('Rock, Paper, Scissors')
 
 function getComputerChoice(choice) {
-    console.log(Math.random())
+    let num = Math.random()
+        if (num <= 0.33) {
+            console.log('Rock')
+        }
+        if (num < 0.66 && num > 0.33) {
+            console.log('Paper')
+        }
+        if (num >= 0.66) {
+            console.log('Scissors')
+        }
 }
 
-if (result != "rock" && result != "paper" && result != "scissors") {    console.log('thefucareyoudoingmate')
+if (result != "rock" && result != "paper" && result != "scissors") {
+    console.log('thefucareyoudoingmate')
 }   else {
     console.log(getComputerChoice())
 }
