@@ -1,35 +1,88 @@
 // gets computer choice
 function getComputerChoice() { 
-    let num = Math.random()
-        if (num <= 0.33) {
-            return 'rock'
-        }
-        if (num < 0.66 && num > 0.33) {
-            return 'paper'
-        }
-        if (num >= 0.66) {
-            return 'scissors'
-        }
+    let num = Math.random();
+    if (num < 0.33) {
+        return 'rock';
+    } else if (num < 0.66) {
+        return 'paper';
+    } else {
+        return 'scissors';
+    }
 }
 
 // prompts user to enter choice
 function getHumanChoice() {
-    let result = prompt('Rock, Paper, Scissors!')
-    let resultModified = result.toLowerCase();
-        return resultModified;
+    let result = prompt('Rock, Paper, Scissors!');
+    if (result) {
+        let resultModified = result.toLowerCase();
+        if (resultModified === "rock" || resultModified === "paper" || resultModified === "scissors") {
+            return resultModified;
+        } else {
+            console.log('Invalid choice, please enter rock, paper, or scissors.');
+            return getHumanChoice();
+        }
+    } else {
+        return null;
+    }
 }
 
-let humanScore = 0
-let computerScore = 0
+// running getHumanChoice and getComputerChoice and playing the game
+function playRound() {
+    let computerSelection = getComputerChoice();
+    let humanSelection = getHumanChoice();
+    if (!humanSelection) {
+        console.log('No input provided!');
+        return null;
+    }
 
-function playRound(humanChoice, computerChoice) {
-    console.log("computer says " + getComputerChoice());
-    console.log("you say " + getHumanChoice());
+    console.log("computer says: " + computerSelection);
+    console.log("you say: " + humanSelection);
+
+    if (humanSelection === "rock" && computerSelection === "paper" ||
+        humanSelection === "paper" && computerSelection === "scissors" ||
+        humanSelection === "scissors" && computerSelection === "rock") {
+        console.log('computer wins!');
+        return 'computer';
+    } else if (humanSelection === computerSelection) {
+        console.log('draw!');
+        return 'draw';
+    } else {
+        console.log('you win!');
+        return 'human';
+    }
 }
 
-playRound();
+// starts the game
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    let rounds = 0;
 
+    while (rounds < 5) {
+        let result = playRound();
+        if (result === 'computer') {
+            computerScore++;
+        } else if (result === 'human') {
+            humanScore++;
+        } else if (result === 'draw') {
+            // Draw case, no score change
+        } else {
+            // Invalid input or no input case
+            continue; // Skip the round without incrementing rounds
+        }
+        rounds++;
+        console.log(`Round ${rounds}: Computer Score = ${computerScore}, Human Score = ${humanScore}`);
+    }
 
-    //     if (resultModified != "rock" && resultModified != "paper" && resultModified != "scissors") {
-    //     console.log('thefucareyoudoingmate')
-    // }   else {
+    console.log('Final Scores:');
+    console.log(`Computer: ${computerScore}`);
+    console.log(`Human: ${humanScore}`);
+
+    if (computerScore > humanScore) {
+        console.log('Computer wins the game!');
+    } else if (humanScore > computerScore) {
+        console.log('You win the game!');
+    } else {
+        console.log('The game is a draw!');
+    }
+}
