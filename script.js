@@ -65,10 +65,8 @@ function playGame() {
         } else if (result === 'human') {
             humanScore++;
         } else if (result === 'draw') {
-            // Draw case, no score change
         } else {
-            // Invalid input or no input case
-            continue; // Skip the round without incrementing rounds
+            continue;
         }
         rounds++;
         console.log(`Round ${rounds}: Computer Score = ${computerScore}, Human Score = ${humanScore}`);
