@@ -10,30 +10,9 @@ function getComputerChoice() {
     }
 }
 
-// prompts user to enter choice
-function getHumanChoice() {
-    let result = prompt('Rock, Paper, Scissors!');
-    if (result) {
-        let resultModified = result.toLowerCase();
-        if (resultModified === "rock" || resultModified === "paper" || resultModified === "scissors") {
-            return resultModified;
-        } else {
-            console.log('Invalid choice, please enter rock, paper, or scissors.');
-            return getHumanChoice();
-        }
-    } else {
-        return null;
-    }
-}
-
 // running getHumanChoice and getComputerChoice and playing the game
-function playRound() {
+function playRound(humanSelection) {
     let computerSelection = getComputerChoice();
-    let humanSelection = getHumanChoice();
-    if (!humanSelection) {
-        console.log('No input provided!');
-        return null;
-    }
 
     console.log("computer says: " + computerSelection);
     console.log("you say: " + humanSelection);
@@ -42,45 +21,14 @@ function playRound() {
         humanSelection === "paper" && computerSelection === "scissors" ||
         humanSelection === "scissors" && computerSelection === "rock") {
         console.log('computer wins!');
-        return 'computer';
     } else if (humanSelection === computerSelection) {
         console.log('draw!');
-        return 'draw';
     } else {
         console.log('you win!');
-        return 'human';
     }
 }
 
-// starts the game
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-    let rounds = 0;
-
-    while (rounds < 5) {
-        let result = playRound();
-        if (result === 'computer') {
-            computerScore++;
-        } else if (result === 'human') {
-            humanScore++;
-        } else if (result === 'draw') {
-        } else {
-            continue;
-        }
-        rounds++;
-        console.log(`Round ${rounds}: Computer Score = ${computerScore}, Human Score = ${humanScore}`);
-    }
-
-    console.log('Final Scores:');
-    console.log(`Computer: ${computerScore}`);
-    console.log(`Human: ${humanScore}`);
-
-    if (computerScore > humanScore) {
-        console.log('Computer wins the game!');
-    } else if (humanScore > computerScore) {
-        console.log('You win the game!');
-    } else {
-        console.log('The game is a draw!');
-    }
-}
+// Add event listeners to buttons using querySelector
+document.querySelector('#rock').addEventListener('click', () => playRound('rock')); 
+document.querySelector('#paper').addEventListener('click', () => playRound('paper')); 
+document.querySelector('#scissors').addEventListener('click', () => playRound('scissors'));
